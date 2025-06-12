@@ -1,4 +1,4 @@
-#**Tile Debugger**<br>
+# **Tile Debugger**<br>
 Your Interactive PostGIS Vector Tile Explorer
 Welcome to the Tile Debugger! This project is an interactive web dashboard built to help you visualize, inspect, and customize vector tiles generated directly from your PostGIS database. Say goodbye to messy, duplicate labels on your maps!
 
