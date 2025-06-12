@@ -14,7 +14,7 @@
 
 <body>
     <div id="app-container">
-        <!-- Sidebar -->
+    <!--  -->
         <aside id="sidebar">
             <div class="sidebar-header">
                 <h2>Database Navigator</h2>
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            {# Basemap Selector Widget - MOVED OUT OF map-controls #}
+            {# Basemap Selector Widget #}
             <div id="basemap-selector" class="basemap-selector">
                 <div class="basemap-options-list">
                     <!-- Basemap options will be dynamically inserted here by JavaScript -->
@@ -67,6 +67,14 @@
             </div>
             <div id="result-display"></div>
         </main>
+    </div>
+
+    <!-- Loading Modal - ADDED THIS HTML -->
+    <div id="loading-modal" class="loading-modal">
+        <div class="loading-content">
+            <i class="fas fa-spinner fa-spin loading-spinner"></i>
+            <span class="loading-text">Loading table...</span>
+        </div>
     </div>
 
     <script>
