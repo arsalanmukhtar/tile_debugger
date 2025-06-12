@@ -1,0 +1,140 @@
+/* app/static/css/_sidebar.css */
+
+/* Sidebar */
+#sidebar { /* Renamed 'sidebar' to '#sidebar' to match HTML */
+    width: 280px;
+    background: var(--color-background-sidebar);
+    border-right: 1px solid var(--color-border-default);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent-primary) var(--color-background-sidebar);
+}
+
+#sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent-primary);
+    border-radius: 3px;
+}
+
+#sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent-secondary);
+}
+
+.sidebar-header {
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: var(--color-accent-primary);
+}
+
+#schema-list { /* Renamed 'schema-list' to '#schema-list' to match HTML */
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.schema-item {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.schema-header {
+    padding: 0.7rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.schema-header:hover {
+    background: var(--color-accent-primary-light);
+}
+
+.schema-info { /* This class doesn't appear in the HTML snippet, but keeping it if it's used elsewhere */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.schema-name {
+    color: var(--color-text-primary);
+    font-weight: 400;
+}
+
+.toggle-icon {
+    color: var(--color-text-secondary);
+    font-size: 0.7rem;
+}
+
+.table-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+}
+
+.table-list.show {
+    max-height: 500px; /* Adjust this value if tables are taller than 500px */
+}
+
+.table-item {
+    padding: 0.6rem 1.5rem 0.6rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.table-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-item:hover {
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-light);
+}
+
+.table-item.active {
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-light);
+    border-left: 3px solid var(--color-accent-primary);
+}
+
+.unload-button {
+    color: var(--color-status-danger);
+    cursor: pointer;
+    opacity: 0.7; /* Original opacity was 0.5 for the standalone unload-button, matched the one in table-item */
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unload-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}

@@ -1,0 +1,8 @@
+/* app/static/css/main.css */
+
+/* Import all modular CSS files */
+@import url('variables.css');
+@import url('base.css');
+@import url('sidebar.css');
+@import url('map.css');
+@import url('components.css');

@@ -1,0 +1,28 @@
+/* app/static/css/_base.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Ensure this font import URL is correct if you're using a local file,
+   otherwise, if you're using Google Fonts, it's usually linked in HTML head.
+   For simplicity, I'm keeping the Google Fonts URL here. */
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500&display=swap');
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: var(--color-background-page);
+    color: var(--color-text-primary);
+}
+
+#app-container { /* Renamed 'container' to 'app-container' to match HTML */
+    display: flex;
+    height: 100%;
+}

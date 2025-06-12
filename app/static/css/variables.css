@@ -1,0 +1,24 @@
+/* app/static/css/_variables.css */
+
+/* Sleek light theme with teal accent and warm tones */
+:root {
+    --color-accent-primary: #007d7e; /* A rich, deep teal for primary actions and highlights */
+    --color-accent-primary-light: rgba(0, 125, 126, 0.1); /* A very subtle light tint of the primary accent color */
+    --color-accent-secondary: #01a3a4; /* A slightly brighter, more vibrant teal for secondary elements */
+
+    --color-background-surface: #fcfbf8; /* A very light, subtle off-white for cards, elevated sections, etc. */
+    --color-background-page: #ffffff; /* Pure white for the main page background */
+    --color-background-sidebar: #f5f4f1; /* A slightly darker off-white/light beige for the sidebar and similar sections */
+
+    --color-text-primary: #333333; /* Dark charcoal for main body text, offering excellent readability */
+    --color-text-secondary: #666666; /* A medium gray for secondary information or less emphasized text */
+    --color-text-tertiary: #a0a0a0; /* Light gray for subtle hints or disabled states */
+
+    --color-status-success: #27ae60; /* A clear, friendly green for success messages */
+    --color-status-warning: #e67e22; /* A warm orange for warnings */
+    --color-status-danger: #c0392b; /* A strong red for danger or errors */
+
+    --color-border-default: #e0e0e0; /* A very light gray for general borders */
+    --color-border-danger: #da9189; /* A strong red for danger borders */
+    --color-border-secondary: #93c4c4; /* A light gray for secondary borders */
+}
