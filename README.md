@@ -94,4 +94,4 @@ Empty map after loading table: Confirm your data is loaded into the specified ta
 
 Display issues: Perform a hard refresh of your browser (Ctrl+Shift+R or Cmd+Shift+R) and restart the FastAPI server to clear old cached files.
 
-Feel free to explore and debug your geospatial data visualizations!
+Feel free to explore and debug your geospatial data visualization!
