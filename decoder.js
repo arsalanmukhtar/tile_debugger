@@ -2,6 +2,7 @@ const vt2geojson = require('vt2geojson');
 
 // remote file
 vt2geojson({
+    // The local or cloud URL to your MVT tile',
     uri: 'http://localhost:8000/api/mvt/public/germany_counties/9/270/176.pbf',
     layer: 'germany_counties_layer'
 }, function (err, result) {
