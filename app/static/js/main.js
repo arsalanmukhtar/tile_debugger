@@ -4,7 +4,6 @@ window.App = window.App || {};
 
 // Define available Mapbox basemap styles with icon classes
 const BASEMAP_STYLES = [
-    // Added 'iconClass' and 'labelText' for better control
     { name: 'Streets', iconClass: 'fas fa-map', labelText: 'Road' , url: 'mapbox://styles/mapbox/streets-v12' },
     { name: 'Satellite', iconClass: 'fas fa-satellite', labelText: 'Sat', url: 'mapbox://styles/mapbox/satellite-streets-v12' },
     { name: 'Light', iconClass: 'fas fa-sun', labelText: 'Light', url: 'mapbox://styles/mapbox/light-v11' },
@@ -27,11 +26,13 @@ window.App.init = function() {
         // Initialize fieldDropdown element reference
         window.App.appState.fieldDropdown = {
             element: document.querySelector('.label-field-dropdown'),
-            header: document.querySelector('.dropdown-header'),
-            content: document.querySelector('.dropdown-content'),
-            chevron: document.querySelector('.dropdown-chevron'),
-            titleSpan: document.querySelector('.dropdown-title')
+            header: document.querySelector('.label-field-dropdown .dropdown-header'),
+            titleSpan: document.querySelector('.label-field-dropdown .dropdown-title'),
+            searchInput: document.querySelector('.label-field-dropdown .dropdown-search-input'),
+            chevron: document.querySelector('.label-field-dropdown .dropdown-chevron'),
+            content: document.querySelector('.label-field-dropdown .dropdown-content')
         };
+        window.App.appState.fieldDropdown.optionsWrapper = null; // Will be created by populateFieldDropdown
 
         document.getElementById('result-display').classList.remove('show');
         window.App.UI.setupUI(); // Call UI setup function
@@ -54,7 +55,7 @@ function initializeMapbox() {
         center: [0, 0],
         zoom: 2,
         hash: true,
-        projection: 'mercator' // NEW: Explicitly set Mercator projection for a flat map
+        projection: 'mercator' // Explicitly set Mercator projection for a flat map
     });
 
     // Add default Mapbox Navigation controls (Zoom and Rotate)
@@ -85,12 +86,9 @@ function setupBasemapSelector() {
         return;
     }
 
-    // FIX: Clear existing options to prevent duplicates
-    basemapOptionsList.innerHTML = '';
+    basemapOptionsList.innerHTML = ''; // Clear existing options to prevent duplicates
 
-
-    // Ensure the toggle button always has the layer-group icon
-    basemapToggleButton.innerHTML = '<i class="fas fa-layer-group"></i>';
+    basemapToggleButton.innerHTML = '<i class="fas fa-layer-group"></i>'; // Ensure the toggle button always has the layer-group icon
 
 
     // Populate the basemap options list
@@ -116,8 +114,13 @@ function setupBasemapSelector() {
             optionDiv.classList.add('active');
         }
 
-        optionDiv.addEventListener('click', (event) => {
+        optionDiv.addEventListener('click', async (event) => { // ADDED async here
             event.stopPropagation();
+
+            // Only proceed if a different style is selected
+            if (window.App.appState.map.getStyle().id === style.url) {
+                return;
+            }
 
             // Remove active class from all options
             document.querySelectorAll('.basemap-option').forEach(item => {
@@ -127,21 +130,32 @@ function setupBasemapSelector() {
             // Add active class to the clicked option
             optionDiv.classList.add('active');
 
-            // Set the new map style if it's different
-            if (window.App.appState.map.getStyle().id !== style.url) {
-                window.App.appState.map.setStyle(style.url);
-                console.log(`Map style changed to: ${style.name}`);
+            // --- LOADING MODAL CONTROL FOR BASEMAP CHANGE ---
+            window.App.UI.showLoadingModal(); // Show modal before changing style
 
-                // Re-add MVT layers after the new style loads
-                window.App.appState.map.once('style.load', () => {
-                    window.App.LayerManagement.readdMVTLayer(); // Use the readd function
+            try {
+                window.App.appState.map.setStyle(style.url);
+                console.log(`Map style changing to: ${style.name}`);
+
+                await new Promise(resolve => {
+                    window.App.appState.map.once('style.load', () => {
+                        console.log(`New basemap style '${style.name}' loaded.`);
+                        resolve();
+                    });
                 });
+                
+                // Re-add MVT layers after the new style loads
+                await window.App.LayerManagement.readdMVTLayer(); // Use the readd function
+            } catch (error) {
+                console.error("Error changing basemap or re-adding layer:", error);
+                window.App.Utils.displayError(`Error changing basemap: ${error.message}`);
+            } finally {
+                window.App.UI.hideLoadingModal(); // Hide modal after all operations
             }
+            // --- END LOADING MODAL CONTROL ---
         });
         basemapOptionsList.appendChild(optionDiv);
     });
-
-    // The hover logic is now purely in CSS.
 }
 
 // Initialize the application when the DOM is fully loaded.
